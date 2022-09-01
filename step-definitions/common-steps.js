@@ -4,17 +4,41 @@ module.exports = function () {
         return helpers.loadPage(page.pageObjects.siteUrls[objectKey]);
     });
 
-    this.Given("I am on the SignUpPage", async function () {
-        await driver.sleep(100);
+    this.When(/^I search for "([^"]*)" in the "([^"]*)"$/, function (val,objectKey) {
+        page.pageObjects.inputElementAP(val,objectKey); 
+    });
+    
+    this.When(/^I scrolldown to "([^"]*)"$/, async function (objectKey) {
+        page.pageObjects.scrollToElement1(objectKey);
+        await driver.sleep(3000);
         return;
+    });
+    
+    this.When(/^I enter "([^"]*)" in the "([^"]*)"$/, function (value,objectKey) {
+        page.pageObjects.inputEmailforNewsLet(value,objectKey);
+        });
+
+    this.Then(/^I should see "([^"]*)"$/, async function (objectKey) {
+        await driver.sleep(2000);
+        return page.pageObjects.elementExists(objectKey);
     });
 
     this.When(/^I click on "([^"]*)"$/, function (objectKey) {
         return page.pageObjects.clickElement(objectKey);
     });
 
-    this.Then(/^I should see "([^"]*)"$/, function (objectKey) {
-        return page.pageObjects.elementExists(objectKey);
+    this.When(/^I hover on "([^"]*)" to go to "([^"]*)"$/, function (objectKey,textval) {
+        return page.pageObjects.hoverElement(objectKey,textval);
+    });
+
+    this.When(/^I click on after a wait on "([^"]*)"$/, async function (objectKey) {
+        await driver.sleep(25000);
+        return page.pageObjects.clickElement(objectKey);
+    });
+
+    this.When(/^I click on "([^"]*)" I should see a new window with "([^"]*)"$/, async function (objectKey1,objectKey2) {
+        await driver.sleep(5000);
+        return page.pageObjects.verifyNewTabOpened(objectKey1,objectKey2);
     });
 
     this.When(/^I enter the inputs$/, async function (table) {

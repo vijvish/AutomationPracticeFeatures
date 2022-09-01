@@ -99,14 +99,16 @@ module.exports = {
 
         // method to execute within the DOM to find elements containing text
         function clickElementInDom(query, content) {
-
+           
+           
             // get the list of elements to inspect
             var elements = document.querySelectorAll(query);
-
+            
             // workout which property to use to get inner text
             var txtProp = ('textContent' in document) ? 'textContent' : 'innerText';
+          
 
-            for (var i = 0, l = elements.length; i < l; i++) {
+           for (var i = 0, l = elements.length; i < l; i++) {
 
                 // if we have content, only click items matching the content
                 if (content) {
