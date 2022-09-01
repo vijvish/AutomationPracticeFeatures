@@ -7,6 +7,7 @@ module.exports = {
     
     siteUrls: {
     AutomationPractice: 'http://automationpractice.com/',
+    APSignIn: 'http://automationpractice.com/index.php?controller=authentication&back=my-account'
     },
 
     elements: {
