@@ -18,6 +18,10 @@ module.exports = function () {
         page.pageObjects.inputEmailforNewsLet(value,objectKey);
         });
 
+    this.When(/^I enter filepath in the "([^"]*)" and click "([^"]*)" to see "([^"]*)"$/, function (objectKey1,objectKey2,objectKey3) {
+        page.pageObjects.chooseFileUpload(objectKey1,objectKey2,objectKey3);
+        });
+
     this.Then(/^I should see "([^"]*)"$/, async function (objectKey) {
         await driver.sleep(2000);
         return page.pageObjects.elementExists(objectKey);
@@ -25,6 +29,13 @@ module.exports = function () {
 
     this.When(/^I click on "([^"]*)"$/, function (objectKey) {
         return page.pageObjects.clickElement(objectKey);
+    });
+
+    this.When(/^I click after a wait on "([^"]*)"$/, async function (objectKey) {
+        var selector = page.pageObjects.elements[objectKey];
+        console.log("Send Button function entered");
+        await driver.wait(until.elementsLocated(By.xpath(selector)), 10000);
+        driver.findElement(By.xpath(selector)).click();
     });
 
     this.When(/^I hover on "([^"]*)" to go to "([^"]*)"$/, function (objectKey,textval) {
@@ -66,6 +77,10 @@ module.exports = function () {
         }
         await driver.sleep(5000);
         return page.pageObjects.elementExists(objectKey);
+    });
+
+    this.Then(/^I verify "([^"]*)"$/, function (objectKey) {
+        return page.pageObjects.verifyEmailLink(objectKey);
     });
 
 

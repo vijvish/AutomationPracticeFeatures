@@ -97,11 +97,4 @@ Feature: As a user I want to navigate to Automation Practice Landing Page and ve
             | APCasualDressesSelector  | APCasualDressesHeader  | CasualDresses  |
             | APEveningDressesSelector | APEveningDressesHeader | EveningDresses |
             | APSummerDressesSelector  | APSummerDressesHeader  | SummerDresses  |
-
-
-
-    @apWomensTabNav2
-    Scenario: As a user I want to mouse over the Women Tab and navigate to all the links under Women tab
-        Given I am on the "AutomationPractice" Page
-        When I hover on "APEveningDressesSelector" to go to "EveningDresses"
-        Then I should see "APEveningDressesHeader"
+            

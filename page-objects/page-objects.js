@@ -7,7 +7,8 @@ module.exports = {
     
     siteUrls: {
     AutomationPractice: 'http://automationpractice.com/',
-    APSignIn: 'http://automationpractice.com/index.php?controller=authentication&back=my-account'
+    APSignIn: 'http://automationpractice.com/index.php?controller=authentication&back=my-account',
+    APContactUsPage: 'http://automationpractice.com/index.php?controller=contact'
     },
 
     elements: {
@@ -17,7 +18,10 @@ module.exports = {
         APContactUsLink: '//div[@id="contact-link"]//a[contains(text(),"Contact us")]',
         APContactPageHeader: '//h1[@class="page-heading bottom-indent"]',
         APSigninLink: '//a[@class="login"]',
+        APSignOutLink:'//a[@class="logout"]',
         APSigninPageHeader: '//h1[@class="page-heading"]',
+        APUserAccountTab: '//a[@class="account"]',
+        UserNameAccountLink: '/html/body/div/div[1]/header/div[2]/div/div/nav/div[1]/a',
         APSearchTextbox: '//input[@id="search_query_top"]',
         APSearchbutton: '//form[@id="searchbox"]//button[@type="submit"]',
         APProductListing: '//div[contains(@class,"top-pagination-content clearfix")]//div[contains(@class,"product-count")][contains(text(),"Showing 1 - 1 of 1 item")]',
@@ -98,11 +102,34 @@ module.exports = {
         APSignInEmailTextBox: '//*[@id="email"]',
         APSignInPasswordTextBox: '//*[@id="passwd"]',
         APSignInButton: '//*[@id="SubmitLogin"]',
-        APSignInSuccessMsg:'//p[@class="info-account"]',
+        APAccountSignInMsg:'//p[@class="info-account"]',
         APSignInDoesNotMatchMsg:'//li[contains(text(),"Authentication failed.")]',
         APSigninEmailRequiredMsg:'//li[contains(text(),"An email address required.")]',
         APSigninPwdRequiredMsg:'//li[contains(text(),"Password is required.")]',
-        APSigninInvalidEmailAddressMsg: '//li[contains(text(),"Invalid email address.")]'
+        APSigninInvalidEmailAddressMsg: '//li[contains(text(),"Invalid email address.")]',
+        APScrollToEmail: '//i[@class="icon-envelope-alt"]',
+        APEmailLink: '//a[contains(text(),"support@seleniumframework.com")]',
+        APMyAccountLink: '//a[contains(text(),"My account")]',
+        APFooterMyOrdersLink: '//a[contains(text(),"My orders")]',
+        APFooterMyCreditSlipsLink: '//a[contains(text(),"My credit slips")]',
+        APFooterMyAddressesLink: '//a[contains(text(),"My addresses")]',
+        APFooterMyPersonalInfoLink: '//a[contains(text(),"My personal info")]',
+        APFooterSignOutLink: '//a[@href="http://automationpractice.com/index.php?mylogout"]',
+        APOrderHistoryPageHeader: '//h1[@class="page-heading bottom-indent"]',
+        APMyCreditSlipsPageHeader: '//h1[@class="page-heading bottom-indent"]',
+        APMyAddressesPageHeader: '//h1[@class="page-heading"]',
+        APMyPersonalInfoPageHeader: '//h1[@class="page-subheading"]',
+        APSignOutPageHeader: '//span[@class="ajax_cart_no_product"]',
+        APContactUsLink: '//div[@id="contact-link"]//a[contains(text(),"Contact us")]',
+        APContactUsHeader: '/html/body/div/div[2]/div/div[3]/div/h1',
+        APContactUsSubjHeadDropBox: '//select[@id="id_contact"]',
+        APContactUsEmail: '//input[@id="email"]',
+        APContactUsOrderReference: '//input[@id="id_order"]',
+        APContactUsMessage: '//textarea[@id="message"]',
+        APContactUsSendBtn: '//span[contains(text(),"Send")]',
+        APContactUsResponseSuccess: '//p[@class="alert alert-success"]',
+        APContactUsFileAttachBox: '//*[@id="center_column"]/form/fieldset/div[1]/div[1]/p[5]/input'
+    
     },
 
     content : {
@@ -114,7 +141,8 @@ module.exports = {
         Dresses: 'Dresses',
         CasualDresses: 'Casual Dresses',
         EveningDresses: 'Evening Dresses',
-        SummerDresses: 'Summer Dresses'
+        SummerDresses: 'Summer Dresses',
+        APContactUsFilePath: "./testData/abc.txt"
 
     },
 
@@ -153,7 +181,7 @@ module.exports = {
         async () => (await driver.getAllWindowHandles()).length === 2,
         10000
         );
-
+            
         //Loop through until we find a new window handle
         const windows = await driver.getAllWindowHandles();
         windows.forEach(async handle => {
@@ -168,6 +196,24 @@ module.exports = {
         //close tab and get back
         driver.close();
         await driver.switchTo().window(originalWindow);
+    },
+
+    verifyEmailLink: async function(objectKey) {
+        var selector = page.pageObjects.elements[objectKey];
+        const string = await driver.findElement(By.xpath(selector)).getAttribute("href");
+        console.log("href value is:" + string);
+
+        if (driver.findElement(By.xpath("//*[text()='support@seleniumframework.com']")))
+         {
+            console.log("verified");
+            return;
+        }
+        else {console.log("error")
+    
+        };
+
+        
+
     },
 
     inputElementAP: async function(val,objectKey) {
@@ -189,6 +235,41 @@ module.exports = {
         var selector = page.pageObjects.elements[objectKey]; 
         await driver.sleep(2000);
         return driver.findElement(By.xpath(selector)).sendKeys(value);
+    },
+
+    chooseFileUpload: async function(objectKey1,objectKey2,objectKey3) {
+        var selector1 = page.pageObjects.elements[objectKey1];
+        var selector2 = page.pageObjects.elements[objectKey2];
+        var selector3 = page.pageObjects.elements[objectKey3];
+        const driver = new driver.Builder()
+  .usingServer("https://hub-cloud.browserstack.com/wd/hub")
+  .withCapabilities(capabilities)
+  .build();
+
+//This will detect your local file
+driver.setFileDetector(new remote.FileDetector());
+
+(async () => {
+  //await driver.get("http://www.fileconvoy.com");
+
+  const filePathElement = await driver.findElement(By.xpath(selector1));
+  await filePathElement.sendKeys("C:\\Users\\vijav\\Workspace\\AutomationPracticeFeatures\\testData\\abc.txt");
+
+  //await (await driver.findElement(webdriver.By.id("readTermsOfUse"))).click();
+  await (await driver.findElement(By.xpath(selector2))).click();
+  try {
+    await driver.wait(webdriver.until.elementIsVisible((await driver.findElement(By.xpath(selector3)))), 5000);
+    if((await driver.findElement(By.xpath(selector3)).getText()).includes('successfully sent')) {
+      await driver.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "File upload successful"}}');
+    } else {
+      await driver.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "File upload failed"}}');
+    }
+    } catch (e) {
+    await driver.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "File could not be uploaded in time"}}');
+    }
+  await driver.quit();
+    })();
+
     },
 
     elementExists: async function(objectKey) {

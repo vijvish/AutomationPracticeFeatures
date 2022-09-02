@@ -22,6 +22,7 @@ Feature: As a user I want to navigate to Automation Practice Landing Page Footer
       | FooterBlk2Link2 | FooterTwitterHeader  |
       | FooterBlk2Link3 | FooterYouTubeHeader  |
       | FooterBlk2Link4 | FooterGoogleHeader   |
+      |EmailLink|Emailheader|
 
 
   @apScrollToFooterBottomLinks
@@ -42,4 +43,41 @@ Feature: As a user I want to navigate to Automation Practice Landing Page Footer
       | FooterBlk4Link7 | APAboutUsHeader     |
       | FooterBlk4Link8 | APSiteMapHeader     |
 
+ @apScrollToFooterBottomMyAccount
+ Scenario Outline: As a user I want to scroll down the Landing Page Footer section and verify the various links work
+   Given I am on the "AutomationPractice" Page
+   When I scrolldown to "APScrollToFooter"
+   And I click on "<Link>"
+   Then I should see "<NewPageHeader>"
+   Examples:
+     | Link            | NewPageHeader       |
+     | FooterBlk3Link1 | APWomenPageHeader   |
+     | FooterBlk4Link1 | APSpecialsHeader    |
+     | FooterBlk4Link2 | APNewProductsHeader |
+     | FooterBlk4Link3 | APBestSellersHeader |
+     | FooterBlk4Link4 | APOurStoresHeader   |
+     | FooterBlk4Link5 | APContactPageHeader |
+     | FooterBlk4Link6 | APTermsCondHeader   |
+     | FooterBlk4Link7 | APAboutUsHeader     |
+     | FooterBlk4Link8 | APSiteMapHeader     |
+      
+@apVerifyEmailLink
+Scenario: As a user I want to scroll down the Landing Page Footer section and verify the Email link works
+  Given I am on the "AutomationPractice" Page
+  When I scrolldown to "APScrollToEmail"
+  Then I verify "APEmailLink"
 
+@apVerifyFooterMyAccountLinks
+Scenario Outline: Verify whether the navigation links to various pages contained in My Account footer works
+Given I am on the "AutomationPractice" Page
+And I scrolldown to "APScrollToFooter"
+When I click on "<Link>"
+And I should see "APSignInEmailTextBox"
+Examples:
+    | Link                       | 
+    | APMyAccountLink            | 
+    | APFooterMyOrdersLink       | 
+    | APFooterMyCreditSlipsLink  | 
+    | APFooterMyAddressesLink    | 
+    | APFooterMyPersonalInfoLink | 
+    
