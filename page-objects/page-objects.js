@@ -8,9 +8,14 @@ module.exports = {
     siteUrls: {
     AutomationPractice: 'http://automationpractice.com/',
     APSignIn: 'http://automationpractice.com/index.php?controller=authentication&back=my-account',
-    APContactUsPage: 'http://automationpractice.com/index.php?controller=contact'
+    APContactUsPage: 'http://automationpractice.com/index.php?controller=contact',
+    APCreateAccountFormPage: 'http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation',
+    APDressesPage: 'http://automationpractice.com/index.php?id_category=8&controller=category',
+    APTShirtsPage: 'http://automationpractice.com/index.php?id_category=5&controller=category',
+    APShoppingCartPage: 'http://automationpractice.com/index.php?controller=order',
     },
 
+APShoppingCartPage: 'http://automationpractice.com/index.php?controller=order',
     elements: {
         APLogo: '//div[@id="header_logo"]/a[@title="My Store"]/img',
         APCartLink: '//a[@title="View my shopping cart"]',
@@ -128,8 +133,91 @@ module.exports = {
         APContactUsMessage: '//textarea[@id="message"]',
         APContactUsSendBtn: '//span[contains(text(),"Send")]',
         APContactUsResponseSuccess: '//p[@class="alert alert-success"]',
-        APContactUsFileAttachBox: '//*[@id="center_column"]/form/fieldset/div[1]/div[1]/p[5]/input'
-    
+        APContactUsFileAttachBox: '//input[@id="fileUpload"]',
+        APContactFormErrorMsg2: '//*[@id="center_column"]/div/p',
+        APContactInvalidEmailErrMsg: '//li[contains(text(),"Invalid email address.")]',
+        APContactMsgBlnkErrMsg: '//li[contains(text(),"The message cannot be blank.")]',
+        APCreateFormEmailInputbox: '//input[@id="email_create"]',
+        APCreateAccButton: '//button[@id="SubmitCreate"]',
+        APCreateAccountFormHeader: '//h3[contains(text(),"Your personal information")]',
+        APCreateAccountAccAlreadyExistsErr: '//li[contains(text(),"An account using this email address has already be")]',
+        APCreateACCFormTitleMr: '//input[@id="id_gender1"]',
+        APCreateACCFormTitleMrs: '//input[@id="id_gender2"]',
+        APCreateFormFirstName: '//input[@id="customer_firstname"]',
+        APCreateFormLastName: '//input[@id="customer_lastname"]',
+        APCreateFormEmail: '//input[@id="email"]',
+        APCreateFormPswd: '//input[@id="passwd"]',
+        APCreateAccDOBDate: '//select[@id="days"]',
+        APCreateAccDOBMonth: '//select[@id="months"]',
+        APCreateAccDOBYear: '//select[@id="years"]',
+        APCreateAccSignUpNewsLtr: '//input[@id="newsletter"]',
+        APCreateAccReceiveSplOffer: '//input[@id="optin"]',
+        APCreateAddressFirstName: '//input[@id="firstname"]',
+        APCreateAddressLastName: '//input[@id="lastname"]',
+        APCreateAddressCompany: '//input[@id="company"]',
+        APCreateAddressLine1: '//input[@id="address1"]',
+        APCreateAddressLine2: '//input[@id="address2"]',
+        APCreateAddressCity: '//input[@id="city"]',
+        APCreateAddressState: '//select[@id="id_state"]',
+        APCreateAddressZip: '//input[@id="postcode"]',
+        APCreateAddressCountry: '//select[@id="id_country"]',
+        APCreateAddressAddTextArea: '//textarea[@id="other"]',
+        APCreateAddressPhone: '//input[@id="phone"]',
+        APCreateAddressMobPhone: '//input[@id="phone_mobile"]',
+        APCreateAddressAlias: '//input[@id="alias"]',
+        APCreateAddressRegisterBtn: '//button[@id="submitAccount"]',
+        APMyAccountPageWelcome: '//*[@id="center_column"]/p',
+        APCreateAccPageErrors: '//*[@id="center_column"]/div/p',
+        APDressesPageItemLink: '//*[@id="center_column"]/ul/li[3]/div/div[2]/h5/a',
+        APAddToCartBtn: '//*[@id="add_to_cart"]/button',
+        APItemNameHeader: '//*[@id="center_column"]/div/div/div[3]/h1',
+        APItemChooseSize: '//*[@id="group_1"]',
+        APItemChooseColor: '//*[@id="color_14"]',
+        APItemPageAddToCartBtn: '//*[@id="add_to_cart"]/button',
+        APProceedToCheckOutBtn: '//*[@id="layer_cart"]/div[1]/div[2]/div[4]/a',
+        APShoppingCartPageHeader: '//*[@id="cart_title"]',
+        APItem2Link: '//*[@id="center_column"]/ul/li/div/div[2]/h5/a',
+        APShoppingCartDeleteItem: '//*[@id="1_2_0_0"]',
+        APShoppingCartChangeQty: '//*[@id="product_1_1_0_742884"]/td[5]/input[1]',
+        APShoppingCartProceedToChkOut: '//*[@id="center_column"]/p[2]/a[1]',
+        APCartSignInTabHeader: '//*[@id="order_step"]/li[2]',
+        APShoppingCartSignInEmail: '//*[@id="email"]',
+        APShoppingCartSignInPswd: '//*[@id="passwd"]',
+        APShoppingCartSignInBtn: '//*[@id="SubmitLogin"]',
+        APShoppingCartAddressHeader: '//*[@id="order_step"]/li[3]',
+        APShoppingCartProceedToChkOut2: '//*[@id="center_column"]/form/p/button',
+        APShoppingCartShippingTabHeader: '//*[@id="order_step"]/li[4]',
+        APShoppingCartAgreeToTemsCheckBox: '//*[@id="cgv"]',
+        APShoppingCartProceedToChkOut3: '//*[@id="form"]/p/button',
+        APShoppingCartPaymentTabHeader: '//*[@id="step_end"]',
+        APShoppingCartPayByWireLink: '//*[@id="HOOK_PAYMENT"]/div[1]/div/p/a',
+        APShoppimgCartConfirmOrderBtn: '//*[@id="cart_navigation"]/button',
+        APShoppingCartOrderCompleteMsg: '//*[@id="center_column"]/div/p/strong',
+        APMyAccOrderHistoryLink: '//*[@id="center_column"]/div/div[1]/ul/li[1]/a',
+        APOrderHistoryPageHeader: '//*[@id="center_column"]/p',
+        APBackToAccBtn: '//*[@id="center_column"]/ul/li[1]/a',
+        APMyAccWishlistsLink: '//*[@id="center_column"]/div/div[2]/ul/li/a/span',
+        MyWishlistHeader: '//*[@id="mywishlist"]/h1',
+        MyWishlistBackToAccBtn: '//*[@id="mywishlist"]/ul/li[1]/a',
+        APMyCreditSlipsLink: '//*[@id="center_column"]/div/div[1]/ul/li[2]/a',
+        APMyCreditSlipsPAgeHeader: '//*[@id="center_column"]/p',
+        MyCreditSlipsBackToAccBtn: '//*[@id="center_column"]/ul/li[1]/a',
+        APMyAccMyAddressesLink: '//*[@id="center_column"]/div/div[1]/ul/li[3]/a',
+        MyAddressesPageHeader: '//*[@id="center_column"]/div[1]/p[1]/strong',
+        MyAddressesBackToAccBtn: '//*[@id="center_column"]/ul/li[1]/a',
+        APMyPersonalInfoLink: '//*[@id="center_column"]/div/div[1]/ul/li[4]/a',
+        MyPersonalInfoPageHeader: '//*[@id="center_column"]/div/p[1]',
+        MyPersonalInfoBackToAccBtn: '//*[@id="center_column"]/ul/li[1]/a'
+
+
+
+
+
+
+
+
+
+,
     },
 
     content : {
@@ -143,7 +231,6 @@ module.exports = {
         EveningDresses: 'Evening Dresses',
         SummerDresses: 'Summer Dresses',
         APContactUsFilePath: "./testData/abc.txt"
-
     },
 
     clickElement: async function(objectKey) {
@@ -224,11 +311,18 @@ module.exports = {
 
     },
 
+    inputElementAfterClear: async function(name,val) {
+        var selector = page.pageObjects.elements[name]; 
+        await driver.sleep(2000);
+        driver.findElement(By.xpath(selector)).clear();
+        return driver.findElement(By.xpath(selector)).sendKeys(val);
+
+    },
+
     inputElement: async function(name,val) {
         var selector = page.pageObjects.elements[name]; 
         await driver.sleep(2000);
         return driver.findElement(By.xpath(selector)).sendKeys(val);
-
     },
 
     inputEmailforNewsLet: async function(value,objectKey) {
@@ -237,27 +331,30 @@ module.exports = {
         return driver.findElement(By.xpath(selector)).sendKeys(value);
     },
 
+
+    inputEmailforNewsLet1: async function(value,objectKey) {
+        var selector = page.pageObjects.elements[objectKey]; 
+        await driver.sleep(2000);
+        driver.findElement(By.xpath(selector)).clear();
+        return driver.findElement(By.xpath(selector)).sendKeys(value);
+    },
+
     chooseFileUpload: async function(objectKey1,objectKey2,objectKey3) {
         var selector1 = page.pageObjects.elements[objectKey1];
         var selector2 = page.pageObjects.elements[objectKey2];
         var selector3 = page.pageObjects.elements[objectKey3];
-        const driver = new driver.Builder()
-  .usingServer("https://hub-cloud.browserstack.com/wd/hub")
-  .withCapabilities(capabilities)
-  .build();
-
-//This will detect your local file
-driver.setFileDetector(new remote.FileDetector());
-
-(async () => {
-  //await driver.get("http://www.fileconvoy.com");
-
-  const filePathElement = await driver.findElement(By.xpath(selector1));
-  await filePathElement.sendKeys("C:\\Users\\vijav\\Workspace\\AutomationPracticeFeatures\\testData\\abc.txt");
-
-  //await (await driver.findElement(webdriver.By.id("readTermsOfUse"))).click();
-  await (await driver.findElement(By.xpath(selector2))).click();
-  try {
+        var selector4 = page.pageObjects.elements.APContactUsFileAttachBox;
+        const filePathElement = await driver.findElement(By.xpath(selector1));
+        console.log("File xpath:" + filePathElement);
+        await filePathElement.sendKeys("C://Users/vijav/Workspace/AutomationPracticeFeatures/testData/abc.txt");
+        console.log("File got selected");
+        await driver.findElement(By.xpath(selector2)).click();
+        await driver.sleep(4000);
+        const upload = await driver.findElement(By.xpath(selector3)).getText();
+        if (upload.includes("successfully sent") ){ console.log("Next screen");}
+        else{console.log("Error");};
+     },
+  /*try {
     await driver.wait(webdriver.until.elementIsVisible((await driver.findElement(By.xpath(selector3)))), 5000);
     if((await driver.findElement(By.xpath(selector3)).getText()).includes('successfully sent')) {
       await driver.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "File upload successful"}}');
@@ -268,15 +365,39 @@ driver.setFileDetector(new remote.FileDetector());
     await driver.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "File could not be uploaded in time"}}');
     }
   await driver.quit();
-    })();
+    })();*/
 
-    },
+    
+
 
     elementExists: async function(objectKey) {
         // eslint-disable-next-line no-console
         var selector = page.pageObjects.elements[objectKey];
         await driver.sleep(5000);
         return driver.findElement(By.xpath(selector));
+    },
+
+    elementExistsCreateAcc: async function(objectKey1, objectKey2) {
+        // eslint-disable-next-line no-console
+        var selector1 = page.pageObjects.elements[objectKey1];
+        var selector2 = page.pageObjects.elements[objectKey2];
+        await driver.sleep(5000);
+
+               if (driver.findElement(By.xpath(selector1)))
+                {
+                   console.log("verified form header");
+                   return true;
+               }
+               else if (driver.findElement(By.xpath(selector2)))
+                {
+                   console.log("verified acc exists error msg");
+                   return true;
+               }
+               else{
+                console.log("error")
+           
+               };
+
     },
 
 

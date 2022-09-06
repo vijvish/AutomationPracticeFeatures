@@ -15,16 +15,30 @@ module.exports = function () {
     });
     
     this.When(/^I enter "([^"]*)" in the "([^"]*)"$/, function (value,objectKey) {
-        page.pageObjects.inputEmailforNewsLet(value,objectKey);
+        return page.pageObjects.inputEmailforNewsLet(value,objectKey);
         });
 
+        this.When(/^I enter "([^"]*)" in "([^"]*)" after clearing the field$/, function (value,objectKey) {
+            return page.pageObjects.inputEmailforNewsLet1(value,objectKey);
+            });
+
     this.When(/^I enter filepath in the "([^"]*)" and click "([^"]*)" to see "([^"]*)"$/, function (objectKey1,objectKey2,objectKey3) {
-        page.pageObjects.chooseFileUpload(objectKey1,objectKey2,objectKey3);
+        return page.pageObjects.chooseFileUpload(objectKey1,objectKey2,objectKey3);
         });
 
     this.Then(/^I should see "([^"]*)"$/, async function (objectKey) {
         await driver.sleep(2000);
         return page.pageObjects.elementExists(objectKey);
+    });
+    
+    this.When(/^I wait for the page to load$/, async function () {
+        await driver.sleep(8000);
+    });
+    
+
+    this.Then(/^I should see "([^"]*)" or "([^"]*)"$/, async function (objectKey1, objectKey2) {
+        await driver.sleep(2000);
+        return page.pageObjects.elementExistsCreateAcc(objectKey1, objectKey2);
     });
 
     this.When(/^I click on "([^"]*)"$/, function (objectKey) {
@@ -83,5 +97,22 @@ module.exports = function () {
         return page.pageObjects.verifyEmailLink(objectKey);
     });
 
+    this.When(/^I enter the inputs after clearing for form$/, async function (table) {
+        const fields = table.rows();
+        for (i = 0; i < fields.length; i++) {
+            page.pageObjects.inputElementAfterClear(fields[i][0], fields[i][1]);
+        };
+        await driver.sleep(3000);
+        return;
+    });
+
+    this.When(/^I enter the inputs for login$/, async function (table) {
+        const fields = table.rows();
+        for (i = 0; i < fields.length; i++) {
+            page.pageObjects.inputElement(fields[i][0], fields[i][1]);
+        };
+        await driver.sleep(3000);
+        return;
+    });
 
 };
